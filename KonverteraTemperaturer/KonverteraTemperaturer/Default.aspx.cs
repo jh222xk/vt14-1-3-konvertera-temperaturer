@@ -26,71 +26,29 @@ namespace KonverteraTemperaturer
                 endTemp = Int32.Parse(TextBoxEndTemp.Text);
                 tempStep = Int32.Parse(TextBoxTempStep.Text);
 
-                if (RadioButtonCelcius.Checked)
+                Table1.Visible = true;
+
+                if (!RadioButtonCelcius.Checked)
                 {
-                    TableHeaderRow tableHeaderRowCelsius = new TableHeaderRow();
-                    TableHeaderCell tableHeaderCellCelsius = new TableHeaderCell();
-                    TableHeaderCell tableHeaderCellFahrenheit = new TableHeaderCell();
-
-                    tableHeaderCellCelsius.Text = "°C";
-
-                    tableHeaderRowCelsius.Cells.Add(tableHeaderCellCelsius);
-
-                    tableHeaderCellFahrenheit.Text = "°F";
-
-                    tableHeaderRowCelsius.Cells.Add(tableHeaderCellFahrenheit);
-
-                    Table1.Rows.Add(tableHeaderRowCelsius);
-
-                    for (int j = startTemp; j <= endTemp; j += tempStep)
-                    {
-                        TableRow row = new TableRow();
-                        TableCell cell = new TableCell();
-                        TableCell cell2 = new TableCell();
-
-                        cell.Text = String.Format("{0}", j);
-                        cell2.Text = String.Format("{0}", Model.TemperatureConverter.CelsiusToFahrenheit(j));
-
-                        row.Cells.Add(cell);
-                        row.Cells.Add(cell2);
-                        Table1.Rows.Add(row);
-
-                    }
-                }
-                else if (RadioButtonFahrenheit.Checked)
-                {
-                    TableHeaderRow tableHeaderRowFahrenheit = new TableHeaderRow();
-                    TableHeaderCell tableHeaderCellCelsius = new TableHeaderCell();
-                    TableHeaderCell tableHeaderCellFahrenheit = new TableHeaderCell();
-
-                    tableHeaderCellFahrenheit.Text = "°F";
-
-                    tableHeaderRowFahrenheit.Cells.Add(tableHeaderCellFahrenheit);
-
-                    tableHeaderCellCelsius.Text = "°C";
-
-                    tableHeaderRowFahrenheit.Cells.Add(tableHeaderCellCelsius);
-                    
-                    Table1.Rows.Add(tableHeaderRowFahrenheit);
-
-                    for (int j = startTemp; j <= endTemp; j +=tempStep)
-                    {
-                        TableRow row = new TableRow();
-                        TableCell cell = new TableCell();
-                        TableCell cell2 = new TableCell();
-
-                        cell.Text = String.Format("{0}", j);
-                        cell2.Text = String.Format("{0}", Model.TemperatureConverter.FahrenheitToCelsius(j));
-
-                        row.Cells.Add(cell);
-                        row.Cells.Add(cell2);
-
-                        Table1.Rows.Add(row);
-                    
-                    }
+                    First.Text = "°F";
+                    Second.Text = "°C";
                 }
 
-                
+                for (int j = startTemp; j <= endTemp; j += tempStep)
+                {
+                    TableRow row = new TableRow();
+                    TableCell cell = new TableCell();
+                    TableCell cell2 = new TableCell();
+
+                    cell.Text = String.Format("{0}", j);
+                    cell2.Text = String.Format("{0:f0}",
+                        RadioButtonCelcius.Checked ? Model.TemperatureConverter.CelsiusToFahrenheit(j) :
+                        Model.TemperatureConverter.FahrenheitToCelsius(j));
+
+                    row.Cells.Add(cell);
+                    row.Cells.Add(cell2);
+                    Table1.Rows.Add(row);
+                }
             }
         }
     }

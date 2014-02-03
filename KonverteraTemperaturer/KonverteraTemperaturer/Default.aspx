@@ -98,7 +98,12 @@
                 HeaderText="Fel inträffade. Åtgärda felen och försök igen."
                 runat="server" />
 
-            <asp:Table ID="Table1" border="1" runat="server"></asp:Table>
+            <asp:Table ID="Table1" border="1" runat="server" Visible="false">
+                <asp:TableHeaderRow ID="TableHeaderRow1" runat="server">
+                    <asp:TableHeaderCell ID="First" runat="server">°C</asp:TableHeaderCell>
+                    <asp:TableHeaderCell ID="Second" runat="server">°F</asp:TableHeaderCell>
+                </asp:TableHeaderRow>
+            </asp:Table>
 
         </div>
     </form>
